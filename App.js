@@ -1,19 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
+import Navigation from './app/navigation/Navigation'
+import { AuthProvider } from './app/context/authContext'
+import { PodcastProvider } from './app/context/podcastContext'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <PaperProvider theme={theme}>
+      <AuthProvider>
+        <PodcastProvider>
+          <Navigation />
+        </PodcastProvider>
+      </AuthProvider>
+    </PaperProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#5f6caf',
+    accent: '#ffb677',
   },
-});
+};
+
